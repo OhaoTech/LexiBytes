@@ -8,6 +8,10 @@
 
 LexiBytes is an ambitious project by the Dalé team at OHAO Tech, aiming to create an innovative word game that leverages local Large Language Models for dynamic storytelling and player interaction. Currently in early development, we're building a unique gaming experience that combines narrative depth with AI-driven gameplay.
 
+![1739044102643](image/README/1739044102643.png)
+
+![1739044543952](image/README/1739044543952.png)
+
 ## Vision
 
 - **Offline AI Gaming**: Utilize local LLM technology for responsive, private gameplay

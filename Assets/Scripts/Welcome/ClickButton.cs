@@ -2,9 +2,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MultiButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    private const string GAMEPLAY_SCENE = "Gameplay";
+    private const string WELCOME_SCENE = "Welcome";
+
     public enum ButtonType
     {
         Start,
@@ -214,7 +218,9 @@ public class MultiButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerE
         switch (buttonType)
         {
             case ButtonType.Start:
-                Debug.Log("Start button clicked");
+                Debug.Log("Loading Gameplay scene...");
+                yield return StartCoroutine(FadeOut());
+                SceneManager.LoadScene("Gameplay");
                 break;
             case ButtonType.Options:
                 Debug.Log("Options button clicked");
@@ -325,6 +331,11 @@ public class MultiButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerE
         {
             audioSource.PlayOneShot(clip);
         }
+    }
+
+    private IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(0.2f);
     }
 
     private void QuitGame()
