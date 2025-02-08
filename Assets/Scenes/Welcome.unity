@@ -253,8 +253,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Options
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -273,13 +273,13 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 2425
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -387,10 +387,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: quit
+  m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -409,13 +409,13 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 2425
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -479,6 +479,7 @@ GameObject:
   - component: {fileID: 500832320}
   - component: {fileID: 500832319}
   - component: {fileID: 500832322}
+  - component: {fileID: 500832323}
   m_Layer: 5
   m_Name: btn_play
   m_TagString: Untagged
@@ -503,8 +504,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -165.31, y: -31.076}
-  m_SizeDelta: {x: 219.3888, y: 41}
+  m_AnchoredPosition: {x: -193.60211, y: -30.626919}
+  m_SizeDelta: {x: 162.8046, y: 40.1018}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &500832319
 MonoBehaviour:
@@ -613,6 +614,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 0
+  buttonText: {fileID: 1351858523}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  colorChangeSpeed: 2
+  colorSaturation: 1
+  colorBrightness: 1
+  useRainbowEffect: 1
+  outlineWidth: 0.2
+  outlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  textWaveSpeed: 1
+  textWaveAmount: 3
+  hoverScale: {x: 1.1, y: 1.1, z: 1}
+  hoverScaleSpeed: 0.1
+  clickPunchForce: 0.3
+  clickElasticity: 0.5
+  clickVibrato: 10
+  clickScaleMultiplier: {x: 1.2, y: 1.2, z: 1}
+  hoverSound: {fileID: 8300000, guid: a6d068aca34c7f48cabde189c1d3f206, type: 3}
+  clickSound: {fileID: 8300000, guid: 02854ca4fe7908a42ba64af3f444be2a, type: 3}
+--- !u!95 &500832323
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500832317}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4012171a3f3fe38838f48acb962b8e30, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +803,7 @@ GameObject:
   - component: {fileID: 595849166}
   - component: {fileID: 595849165}
   - component: {fileID: 595849164}
+  - component: {fileID: 595849168}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -855,6 +897,103 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!82 &595849168
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595849163}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6a2057f8c8fd525a0a00d391e5b464fe, type: 3}
+  m_Resource: {fileID: 8300000, guid: 6a2057f8c8fd525a0a00d391e5b464fe, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,8 +1194,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -133.46, y: -83.224}
-  m_SizeDelta: {x: 283.0967, y: 48.8964}
+  m_AnchoredPosition: {x: -175.67366, y: -80.97859}
+  m_SizeDelta: {x: 198.6694, y: 44.4056}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1180085964
 MonoBehaviour:
@@ -1077,7 +1216,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1165,6 +1304,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 1
+  buttonText: {fileID: 161564285}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  colorChangeSpeed: 2
+  colorSaturation: 1
+  colorBrightness: 1
+  useRainbowEffect: 1
+  outlineWidth: 0.2
+  outlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  textWaveSpeed: 1
+  textWaveAmount: 3
+  hoverScale: {x: 1.1, y: 1.1, z: 1}
+  hoverScaleSpeed: 0.1
+  clickPunchForce: 0.3
+  clickElasticity: 0.5
+  clickVibrato: 10
+  clickScaleMultiplier: {x: 1.2, y: 1.2, z: 1}
+  hoverSound: {fileID: 8300000, guid: a6d068aca34c7f48cabde189c1d3f206, type: 3}
+  clickSound: {fileID: 8300000, guid: 02854ca4fe7908a42ba64af3f444be2a, type: 3}
 --- !u!1 &1261108785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,8 +1359,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -177.99, y: -133.2}
-  m_SizeDelta: {x: 194.0136, y: 51.056}
+  m_AnchoredPosition: {x: -208.75208, y: -133.42453}
+  m_SizeDelta: {x: 132.4895, y: 50.6069}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1261108787
 MonoBehaviour:
@@ -1224,7 +1381,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1312,6 +1469,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 2
+  buttonText: {fileID: 234058759}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  colorChangeSpeed: 2
+  colorSaturation: 1
+  colorBrightness: 1
+  useRainbowEffect: 1
+  outlineWidth: 0.2
+  outlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  textWaveSpeed: 1
+  textWaveAmount: 3
+  hoverScale: {x: 1.1, y: 1.1, z: 1}
+  hoverScaleSpeed: 0.1
+  clickPunchForce: 0.3
+  clickElasticity: 0.5
+  clickVibrato: 10
+  clickScaleMultiplier: {x: 1.2, y: 1.2, z: 1}
+  hoverSound: {fileID: 8300000, guid: a6d068aca34c7f48cabde189c1d3f206, type: 3}
+  clickSound: {fileID: 8300000, guid: 02854ca4fe7908a42ba64af3f444be2a, type: 3}
 --- !u!1 &1351858521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,10 +1544,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: stArt
+  m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1391,13 +1566,13 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 2425
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
