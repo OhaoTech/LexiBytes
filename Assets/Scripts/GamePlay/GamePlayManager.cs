@@ -13,6 +13,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private TMP_InputField playerInput;
     [SerializeField] private Button submitButton;
     [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private Button setupButton;
     private LLMService llmService;
 
     private string conversationHistory = "";
@@ -52,6 +53,45 @@ public class GameplayManager : MonoBehaviour
         {
             submitButton.onClick.AddListener(OnSubmitClicked);
             playerInput.onSubmit.AddListener(OnInputSubmit);
+
+            // Add setup button handler
+            if (setupButton != null)
+            {
+                setupButton.onClick.AddListener(ShowSetupWindow);
+            }
+        }
+    }
+
+    private void ShowSetupWindow()
+    {
+        var setupWindow = FindObjectOfType<StorySetupWindow>();
+        if (setupWindow == null)
+        {
+            var windowObj = new GameObject("StorySetup");
+            setupWindow = windowObj.AddComponent<StorySetupWindow>();
+        }
+
+        setupWindow.LoadGameData(currentGame);
+        setupWindow.Show(
+            (updatedGame) =>
+            {
+                currentGame = updatedGame;
+                RefreshStoryDisplay();
+            },
+            () =>
+            {
+                Destroy(setupWindow.gameObject);
+            }
+        );
+    }
+
+    private void RefreshStoryDisplay()
+    {
+        // Clear and reload the story text
+        if (storyText != null)
+        {
+            storyText.text = "";
+            LoadConversationHistory();
         }
     }
 
@@ -180,7 +220,13 @@ public class GameplayManager : MonoBehaviour
 
         // Build context from dialogue history
         StringBuilder contextBuilder = new StringBuilder();
-        foreach (var entry in currentGame.dialogue.TakeLast(5)) // Take last 5 entries for context
+        contextBuilder.AppendLine($"Title: {currentGame.title}");
+        if (!string.IsNullOrEmpty(currentGame.description))
+        {
+            contextBuilder.AppendLine($"Description: {currentGame.description}");
+        }
+
+        foreach (var entry in currentGame.dialogue.TakeLast(5))
         {
             contextBuilder.AppendLine($"{entry.speaker}: {entry.message}");
         }
@@ -220,14 +266,17 @@ public class GameplayManager : MonoBehaviour
         );
     }
 
-    public void SetupReferences(TextMeshProUGUI storyText, TMP_InputField playerInput, Button submitButton, ScrollRect scrollRect)
+    public void SetupReferences(TextMeshProUGUI storyText, TMP_InputField playerInput,
+        Button submitButton, ScrollRect scrollRect, Button setupButton)
     {
         this.storyText = storyText;
         this.playerInput = playerInput;
         this.submitButton = submitButton;
         this.scrollRect = scrollRect;
+        this.setupButton = setupButton;
 
-        if (!isInitialized && storyText != null && playerInput != null && submitButton != null && scrollRect != null)
+        if (!isInitialized && storyText != null && playerInput != null &&
+            submitButton != null && scrollRect != null && setupButton != null)
         {
             InitializeUI();
             StartStory();

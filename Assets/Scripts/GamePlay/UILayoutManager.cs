@@ -82,20 +82,31 @@ public class UILayoutManager : MonoBehaviour
         HorizontalLayoutGroup headerLayout = headerPanel.AddComponent<HorizontalLayoutGroup>();
         headerLayout.padding = new RectOffset((int)padding, (int)padding, (int)padding, (int)padding);
         headerLayout.spacing = padding;
-        headerLayout.childControlWidth = false;
-        headerLayout.childForceExpandWidth = false;
         headerLayout.childAlignment = TextAnchor.MiddleLeft;
+        headerLayout.childControlWidth = true;
+        headerLayout.childForceExpandWidth = false;
 
         // Add layout element to control height
         LayoutElement headerElement = headerPanel.AddComponent<LayoutElement>();
         headerElement.minHeight = backButtonHeight + padding * 2;
         headerElement.flexibleHeight = 0;
 
-        // Create back button inside header
+        // Left side: Back button
         GameObject backButton = CreateBackButtonNew(headerPanel.transform);
 
-        // Create model selector inside header
-        GameObject modelSelector = Instantiate(modelSelectorPrefab, headerPanel.transform);
+        // Create a container for model selector
+        GameObject modelContainer = CreatePanel("ModelContainer", headerPanel.transform);
+        var modelContainerLayout = modelContainer.AddComponent<HorizontalLayoutGroup>();
+        modelContainerLayout.childAlignment = TextAnchor.MiddleLeft;
+        modelContainerLayout.spacing = padding;
+        var modelContainerElement = modelContainer.AddComponent<LayoutElement>();
+        modelContainerElement.flexibleWidth = 1;
+
+        // Model selector inside container
+        GameObject modelSelector = Instantiate(modelSelectorPrefab, modelContainer.transform);
+
+        // Right side: Setup button
+        GameObject setupButton = CreateCompactButton("SetupButton", headerPanel.transform, "⚙ Setup", 100);
 
         return headerPanel;
     }
@@ -356,12 +367,17 @@ public class UILayoutManager : MonoBehaviour
         return canvas;
     }
 
-    private void SetupGameplayManager(TextMeshProUGUI storyText, TMP_InputField inputField, Button submitButton, ScrollRect scrollRect)
+    private void SetupGameplayManager(TextMeshProUGUI storyText, TMP_InputField inputField,
+        Button submitButton, ScrollRect scrollRect)
     {
         GameplayManager gameplayManager = FindObjectOfType<GameplayManager>();
         if (gameplayManager != null)
         {
-            StartCoroutine(SetupGameplayManagerDelayed(storyText, inputField, submitButton, scrollRect));
+            // Find setup button in header panel
+            Button setupButton = GameObject.Find("SetupButton")?.GetComponent<Button>();
+
+            StartCoroutine(SetupGameplayManagerDelayed(storyText, inputField,
+                submitButton, scrollRect, setupButton));
         }
         else
         {
@@ -369,12 +385,13 @@ public class UILayoutManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SetupGameplayManagerDelayed(TextMeshProUGUI storyText, TMP_InputField inputField, Button submitButton, ScrollRect scrollRect)
+    private IEnumerator SetupGameplayManagerDelayed(TextMeshProUGUI storyText,
+        TMP_InputField inputField, Button submitButton, ScrollRect scrollRect, Button setupButton)
     {
         yield return new WaitForEndOfFrame();
 
         GameplayManager gameplayManager = FindObjectOfType<GameplayManager>();
-        gameplayManager.SetupReferences(storyText, inputField, submitButton, scrollRect);
+        gameplayManager.SetupReferences(storyText, inputField, submitButton, scrollRect, setupButton);
     }
 
     private void CreateBackButton(Transform parent)
@@ -423,17 +440,58 @@ public class UILayoutManager : MonoBehaviour
     private void OnBackButtonClicked()
     {
         // Optional: Add fade out or transition effect
-        StartCoroutine(TransitionToWelcome());
+        StartCoroutine(TransitionToLibrary());
     }
 
-    private IEnumerator TransitionToWelcome()
+    private IEnumerator TransitionToLibrary()
     {
         // Optional: Add your transition effects here
         yield return new WaitForSeconds(0.1f);
 
         // Load Welcome scene
-        SceneManager.LoadScene("Welcome");
+        SceneManager.LoadScene("Library");
     }
 
+
+    private GameObject CreateCompactButton(string name, Transform parent, string text, float width)
+    {
+        GameObject buttonObj = CreatePanel(name, parent);
+
+        // Button component
+        Button button = buttonObj.AddComponent<Button>();
+        Image buttonImage = buttonObj.GetComponent<Image>();
+        buttonImage.color = accentColor;
+        buttonImage.sprite = CreateRoundedRectSprite(cornerRadius);
+        buttonImage.type = Image.Type.Sliced;
+
+        // Button text
+        GameObject textObj = new GameObject("Text", typeof(RectTransform));
+        textObj.transform.SetParent(buttonObj.transform);
+        TextMeshProUGUI buttonText = textObj.AddComponent<TextMeshProUGUI>();
+        buttonText.text = text;
+        buttonText.color = Color.white;
+        buttonText.fontSize = 14;
+        buttonText.alignment = TextAlignmentOptions.Center;
+        buttonText.fontStyle = FontStyles.Bold;
+
+        // Position text
+        RectTransform textRT = textObj.GetComponent<RectTransform>();
+        textRT.anchorMin = Vector2.zero;
+        textRT.anchorMax = Vector2.one;
+        textRT.sizeDelta = Vector2.zero;
+        textRT.anchoredPosition = Vector2.zero;
+
+        // Layout settings
+        LayoutElement buttonLayout = buttonObj.AddComponent<LayoutElement>();
+        buttonLayout.minWidth = width;
+        buttonLayout.preferredWidth = width;
+        buttonLayout.minHeight = backButtonHeight - 8; // Slightly shorter than back button
+        buttonLayout.flexibleWidth = 0;
+
+        // hover animation
+        AddButtonAnimation(button);
+
+        return buttonObj;
+    }
 
 }
