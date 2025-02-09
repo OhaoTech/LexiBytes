@@ -45,19 +45,16 @@ public class LibraryLayoutGUI : MonoBehaviour
 
     private void Start()
     {
+        if (GameLibrary.Instance == null)
+        {
+            Debug.LogError("GameLibrary not found in scene! Creating one...");
+            GameObject libraryObj = new GameObject("GameLibrary");
+            libraryObj.AddComponent<GameLibrary>();
+        }
+
         // Load games
         games = GameLibrary.Instance.GetAllGames();
         SortGames();
-    }
-
-    private void OnEnable()
-    {
-        // Load games when component is enabled
-        if (GameLibrary.Instance != null)
-        {
-            games = GameLibrary.Instance.GetAllGames();
-            SortGames();
-        }
     }
 
     private void SortGames()
@@ -234,6 +231,13 @@ public class LibraryLayoutGUI : MonoBehaviour
         Rect cardRect = new Rect(x, y, cardWidth, cardHeight);
         GUI.Box(cardRect, "", cardStyle ?? GUI.skin.box);
 
+        Rect deleteRect = new Rect(cardRect.xMax - 30, cardRect.y + 5, 25, 25);
+        if (GUI.Button(deleteRect, "×"))
+        {
+            DeleteGameCard(game);
+            return;
+        }
+
         if (GUI.Button(cardRect, ""))
         {
             LoadGame(game);
@@ -349,4 +353,69 @@ public class LibraryLayoutGUI : MonoBehaviour
         System.GC.Collect();
         Resources.UnloadUnusedAssets();
     }
+
+    private void CreateNewGameCard()
+    {
+        var newGame = GameLibrary.Instance.CreateGame();
+        LoadGame(newGame); // Automatically open the new game
+    }
+
+    private void DeleteGameCard(GameData game)
+    {
+        GameLibrary.Instance.DeleteGame(game.id);
+        RefreshGameList();
+    }
+
+    private void RefreshGameList()
+    {
+        games = GameLibrary.Instance.GetAllGames();
+        SortGames();
+    }
+
+    // Subscribe to GameLibrary events
+    private void OnEnable()
+    {
+        StartCoroutine(SubscribeToEvents());
+
+    }
+
+    private void OnDisable()
+    {
+        if (GameLibrary.Instance != null)
+        {
+            GameLibrary.Instance.OnGameCreated -= OnGameCreated;
+            GameLibrary.Instance.OnGameUpdated -= OnGameUpdated;
+            GameLibrary.Instance.OnGameDeleted -= OnGameDeleted;
+        }
+    }
+
+    private IEnumerator SubscribeToEvents()
+    {
+        // Wait until GameLibrary is available
+        while (GameLibrary.Instance == null)
+        {
+            yield return null;
+        }
+
+        // Now it's safe to subscribe
+        GameLibrary.Instance.OnGameCreated += OnGameCreated;
+        GameLibrary.Instance.OnGameUpdated += OnGameUpdated;
+        GameLibrary.Instance.OnGameDeleted += OnGameDeleted;
+    }
+
+    private void OnGameCreated(GameData game)
+    {
+        RefreshGameList();
+    }
+
+    private void OnGameUpdated(GameData game)
+    {
+        RefreshGameList();
+    }
+
+    private void OnGameDeleted(string gameId)
+    {
+        RefreshGameList();
+    }
+
 }
