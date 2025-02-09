@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MultiButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private const string GAMEPLAY_SCENE = "Gameplay";
+    private const string LIBRARY_SCENE = "Library";
     private const string WELCOME_SCENE = "Welcome";
 
     public enum ButtonType
@@ -220,7 +221,7 @@ public class MultiButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerE
             case ButtonType.Start:
                 Debug.Log("Loading Gameplay scene...");
                 yield return StartCoroutine(FadeOut());
-                SceneManager.LoadScene("Gameplay");
+                SceneManager.LoadScene(LIBRARY_SCENE);
                 break;
             case ButtonType.Options:
                 Debug.Log("Options button clicked");
