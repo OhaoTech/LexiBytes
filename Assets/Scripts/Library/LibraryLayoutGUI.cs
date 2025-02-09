@@ -277,12 +277,31 @@ public class LibraryLayoutGUI : MonoBehaviour
 
     private void CreateNewStory()
     {
-        // Disable and cleanup this GUI before loading new scene
-        CleanupAndTransition(() =>
+        // Create the setup window if it doesn't exist
+        var setupWindow = FindObjectOfType<NewStorySetupWindow>();
+        if (setupWindow == null)
         {
-            PlayerPrefs.DeleteKey("SelectedGameId");
-            SceneManager.LoadScene("Gameplay");
-        });
+            var windowObj = new GameObject("NewStorySetup");
+            setupWindow = windowObj.AddComponent<NewStorySetupWindow>();
+        }
+
+        // Show the setup window
+        setupWindow.Show(
+            (newGame) =>
+            {
+                // When setup is complete, transition to gameplay
+                CleanupAndTransition(() =>
+                {
+                    PlayerPrefs.SetString("SelectedGameId", newGame.id);
+                    SceneManager.LoadScene("Gameplay");
+                });
+            },
+            () =>
+            {
+                // When cancelled, just destroy the setup window
+                Destroy(setupWindow.gameObject);
+            }
+        );
     }
 
     private void CleanupAndTransition(System.Action onComplete)
